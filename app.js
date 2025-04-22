@@ -14,19 +14,21 @@ function getHumanChoice() {                                // create function na
 }
 
 
-let huChoPre = getHumanChoice();                                                              // initialize humanChoice with getHumanChoice result, make sure the variable is case-insensitive
-let huCho = huChoPre.charAt(0).toUpperCase() + huChoPre.slice(1).toLowerCase();
-let coCho = getComputerChoice();  // initialize computerChoice with getComputerChoice result
-console.log("You: " + huCho);     // printing human choice for now (will remove later)
-console.log("CPU: " + coCho);
 
 
-function playGame(){
+
+function playGame() {
 
     let humanScore = 0;  // create non-pconstant variable named humanScore, initialize it with 0
     let compScore = 0;   // create non-constant variable named computerScore, initialize it with 0
 
-    function playRound(humanChoice, compChoice) {                            // create function called playRound, define 2 params, humanChoice and computerChoice
+    function playRound() {                            // create function called playRound, define 2 params, humanChoice and computerChoice
+
+        let huChoPre = getHumanChoice();                                                              // initialize humanChoice with getHumanChoice result, make sure the variable is case-insensitive
+        let humanChoice = huChoPre.charAt(0).toUpperCase() + huChoPre.slice(1).toLowerCase();
+        let compChoice = getComputerChoice();   // initialize computerChoice with getComputerChoice result
+        console.log("You: " + humanChoice);     // printing human choice for now (will remove later)
+        console.log("CPU: " + compChoice);
 
         if (humanChoice == "Rock" && compChoice == "Paper") {                  //      create conditional statement to determine the roundResult
             console.log("You Lose...")
@@ -50,18 +52,30 @@ function playGame(){
         } else if (humanChoice == "Scissors" && compChoice == "Scissors") {
             console.log("It's a Tie")                                           //              if human Scissors, comp Scissors, set roundResult to tie
         } else {
-            console.log("You Losex...")
+            console.log("You Lose...")
             ++compScore;                                      //              if human Scissors, comp Rock, set roundResult to comp
         }
-    
+
         console.log("You: " + humanScore);
         console.log("CPU: " + compScore);
     }
 
+    playRound();
+    playRound();
+    playRound();
+    playRound();
+    playRound();
+    displayWinner();
 
-    playRound(huCho, coCho);
-
-
+    function displayWinner() {
+        if (humanScore > compScore) {
+            console.log("You Win the Game!")
+        } else if (humanScore == compScore){
+            console.log("It's a Tie")
+        } else (
+            console.log("You Lose the Game...")
+        )
+    }
 }
 
 playGame();
