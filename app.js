@@ -15,18 +15,21 @@ function getHumanChoice() {                                // create function na
 
 
 
-
-
-function playGame() {
+function playGame() {   // create function named playGame
 
     let humanScore = 0;  // create non-pconstant variable named humanScore, initialize it with 0
     let compScore = 0;   // create non-constant variable named computerScore, initialize it with 0
+    let roundNum = 1;
 
     function playRound() {                            // create function called playRound, define 2 params, humanChoice and computerChoice
 
         let huChoPre = getHumanChoice();                                                              // initialize humanChoice with getHumanChoice result, make sure the variable is case-insensitive
         let humanChoice = huChoPre.charAt(0).toUpperCase() + huChoPre.slice(1).toLowerCase();
         let compChoice = getComputerChoice();   // initialize computerChoice with getComputerChoice result
+        
+        console.log("");
+        console.log("Round " + roundNum);
+        ++roundNum;
         console.log("You: " + humanChoice);     // printing human choice for now (will remove later)
         console.log("CPU: " + compChoice);
 
@@ -60,18 +63,20 @@ function playGame() {
         console.log("CPU: " + compScore);
     }
 
+    playRound();   //      call playGame 5 times
     playRound();
     playRound();
     playRound();
     playRound();
-    playRound();
-    displayWinner();
+    console.log("");
+    console.log("");
+    displayWinner();   // declare winner of game
 
-    function displayWinner() {
+    function displayWinner() {  // create function to display winner
         if (humanScore > compScore) {
             console.log("You Win the Game!")
         } else if (humanScore == compScore){
-            console.log("It's a Tie")
+            console.log("The Game is a Tie")
         } else (
             console.log("You Lose the Game...")
         )
@@ -79,15 +84,3 @@ function playGame() {
 }
 
 playGame();
-
-
-
-
-
-
-
-
-
-// create function named playGame
-//      move playRound function inside this one
-//      call playGame 5 times
