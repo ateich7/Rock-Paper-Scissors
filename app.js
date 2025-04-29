@@ -21,66 +21,78 @@ function playGame() {   // create function named playGame
     let compScore = 0;   // create non-constant variable named computerScore, initialize it with 0
     let roundNum = 1;
 
-    function playRound() {                            // create function called playRound, define 2 params, humanChoice and computerChoice
+    const container = document.querySelector("#contain");
+    const rock = document.getElementById("rock");
+    const paper = document.getElementById("paper");
+    const scissors = document.getElementById("scissors");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const roundLog = document.getElementById("roundLog");
+    const huCho = document.getElementById("huCho");
+    const coCho = document.getElementById("coCho");
+    const roundResult = document.getElementById("roundResult");
 
-        let huChoPre = getHumanChoice();                                                              // initialize humanChoice with getHumanChoice result, make sure the variable is case-insensitive
-        let humanChoice = huChoPre.charAt(0).toUpperCase() + huChoPre.slice(1).toLowerCase();
+
+    rock.addEventListener("click", () => playRound("Rock"));
+    paper.addEventListener("click", () => playRound("Paper"));
+    scissors.addEventListener("click", () => playRound("Scissors"));
+
+    function playRound(humanChoice) {                            // create function called playRound, define 2 params, humanChoice and computerChoice
         let compChoice = getComputerChoice();   // initialize computerChoice with getComputerChoice result
-        
-        console.log("");
-        console.log("Round " + roundNum);
+
+        roundLog.textContent = `Round ${roundNum}`;
+        huCho.textContent = `You: ${humanChoice}`; 
+        coCho.textContent = `CPU: ${compChoice}`;
         ++roundNum;
         console.log("You: " + humanChoice);     // printing human choice for now (will remove later)
         console.log("CPU: " + compChoice);
 
         if (humanChoice == "Rock" && compChoice == "Paper") {                  //      create conditional statement to determine the roundResult
-            console.log("You Lose...")
+            roundResult.textContent = "You Lose..."
             ++compScore;                                   //              if human Rock, comp Paper, set roundResult to comp
         } else if (humanChoice == "Rock" && compChoice == "Scissors") {
-            console.log("You Win!")
+            roundResult.textContent = "You Win!" 
             ++humanScore;                                       //              if human Rock, comp Scissors, set roundResult to human
         } else if (humanChoice == "Rock" && compChoice == "Rock") {
-            console.log("It's a Tie")                                          //              if human Rock, comp Rock, set roundResult to tie
+            roundResult.textContent = "It's a Tie"                                        //              if human Rock, comp Rock, set roundResult to tie
         } else if (humanChoice == "Paper" && compChoice == "Paper") {
-            console.log("It's a Tie")                                       //              if human Paper, comp Paper, set roundResult to tie
+            roundResult.textContent = "It's a Tie"                                       //              if human Paper, comp Paper, set roundResult to tie
         } else if (humanChoice == "Paper" && compChoice == "Scissors") {
-            console.log("You Lose...")
+            roundResult.textContent = "You Lose..."
             ++compScore;                                        //              if human Paper, comp Scissors, set roundResult to comp
         } else if (humanChoice == "Paper" && compChoice == "Rock") {
-            console.log("You Win!")
+            roundResult.textContent = "You Win!" 
             ++humanScore;                                           //              if human Paper, comp Rock, set roundResult to human
         } else if (humanChoice == "Scissors" && compChoice == "Paper") {
-            console.log("You Win!")
+            roundResult.textContent = "You Win!" 
             ++humanScore;                                          //              if human Scissors, comp Paper, set roundResult to human
         } else if (humanChoice == "Scissors" && compChoice == "Scissors") {
-            console.log("It's a Tie")                                           //              if human Scissors, comp Scissors, set roundResult to tie
+            roundResult.textContent = "It's a Tie"                                           //              if human Scissors, comp Scissors, set roundResult to tie
         } else {
-            console.log("You Lose...")
+            roundResult.textContent = "You Lose..."
             ++compScore;                                      //              if human Scissors, comp Rock, set roundResult to comp
         }
+       
+        scoreDisplay.textContent = `You: ${humanScore} CPU: ${compScore}`
 
-        console.log("You: " + humanScore);
-        console.log("CPU: " + compScore);
+        if (roundNum > 5) {
+            scoreDisplay.textContent += displayWinner();   // declare winner of game
+         }
+         
+     
+         function displayWinner() {  // create function to display winner
+             if (humanScore > compScore) {
+                 return "You Win the Game!";
+             } else if (humanScore == compScore) {
+                 return "The Game is a Tie";
+             } else {
+                 return "You Lose the Game..."
+             }
+         }
+        
     }
 
-    playRound();   //      call playGame 5 times
-    playRound();
-    playRound();
-    playRound();
-    playRound();
-    console.log("");
-    console.log("");
-    displayWinner();   // declare winner of game
-
-    function displayWinner() {  // create function to display winner
-        if (humanScore > compScore) {
-            console.log("You Win the Game!")
-        } else if (humanScore == compScore){
-            console.log("The Game is a Tie")
-        } else (
-            console.log("You Lose the Game...")
-        )
-    }
+   
 }
 
 playGame();
+
